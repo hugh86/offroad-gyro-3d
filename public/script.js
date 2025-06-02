@@ -1,5 +1,5 @@
-import * as THREE from './libs/three.module.js';
-import { GLTFLoader } from './libs/GLTFLoader.js';
+import * as THREE from 'three';
+import { GLTFLoader } from 'GLTFLoader';
 
 let scene, camera, renderer, vehicle;
 
@@ -8,20 +8,23 @@ animate();
 
 function init() {
   scene = new THREE.Scene();
-  camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+  camera = new THREE.PerspectiveCamera(
+    75,
+    window.innerWidth / window.innerHeight,
+    0.1,
+    1000
+  );
   camera.position.set(0, 2, 5);
 
   renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setSize(window.innerWidth, window.innerHeight);
   document.body.appendChild(renderer.domElement);
 
-  // Lights
   const light = new THREE.DirectionalLight(0xffffff, 1);
   light.position.set(5, 10, 7.5);
   scene.add(light);
   scene.add(new THREE.AmbientLight(0x404040));
 
-  // Green cube fallback
   const geometry = new THREE.BoxGeometry();
   const material = new THREE.MeshStandardMaterial({ color: 0x00ff00 });
   const cube = new THREE.Mesh(geometry, material);
@@ -29,15 +32,14 @@ function init() {
   scene.add(cube);
 
   console.log('Script loaded. Starting GLTF load...');
-
   const loader = new GLTFLoader();
   loader.load(
-    '/offroad.glb',
+    'offroad.glb',
     function (gltf) {
-      console.log('GLB model loaded successfully.');
       vehicle = gltf.scene;
       vehicle.scale.set(1, 1, 1);
       scene.add(vehicle);
+      console.log('GLB model loaded successfully.');
     },
     undefined,
     function (error) {
