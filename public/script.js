@@ -21,7 +21,7 @@ function init() {
   scene.add(light);
   scene.add(new THREE.AmbientLight(0x404040));
 
-  // TEST OBJECT (green cube fallback)
+  // Green cube fallback
   const geometry = new THREE.BoxGeometry();
   const material = new THREE.MeshStandardMaterial({ color: 0x00ff00 });
   const cube = new THREE.Mesh(geometry, material);
@@ -39,9 +39,7 @@ function init() {
       vehicle.scale.set(1, 1, 1);
       scene.add(vehicle);
     },
-    function (xhr) {
-      console.log(`GLB loading: ${(xhr.loaded / xhr.total * 100).toFixed(1)}% loaded`);
-    },
+    undefined,
     function (error) {
       console.error('Error loading GLB model:', error);
     }
