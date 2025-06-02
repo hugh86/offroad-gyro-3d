@@ -25,22 +25,24 @@ function init() {
   cube.position.set(0, 0.5, 0);
   scene.add(cube);
 
-  // Load GLB model
-  const loader = new THREE.GLTFLoader();
-  console.log('Trying to load: offroad.glb');
-  loader.load(
-    'offroad.glb',
-    function (gltf) {
-      vehicle = gltf.scene;
-      vehicle.scale.set(1, 1, 1);
-      scene.add(vehicle);
-      console.log('GLB model loaded successfully.');
-    },
-    undefined,
-    function (error) {
-      console.error('Error loading GLB model:', error);
-    }
-  );
+  console.log('Script loaded. Starting GLTF load...');
+
+const loader = new THREE.GLTFLoader();
+loader.load(
+  '/offroad.glb', // Make sure the slash is here to ensure root-relative path
+  function (gltf) {
+    console.log('GLB model loaded successfully.');
+    vehicle = gltf.scene;
+    vehicle.scale.set(1, 1, 1);
+    scene.add(vehicle);
+  },
+  function (xhr) {
+    console.log(`GLB loading: ${xhr.loaded / xhr.total * 100}% loaded`);
+  },
+  function (error) {
+    console.error('Error loading GLB model:', error);
+  }
+);
 
   window.addEventListener('deviceorientation', handleOrientation);
   window.addEventListener('resize', onWindowResize);
