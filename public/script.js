@@ -46,4 +46,16 @@ function handleOrientation(event) {
   const z = Math.sin(yaw) * length;
 
   const newPoints = [new THREE.Vector3(0, 0, 0), new THREE.Vector3(x, y, z)];
-  orientationLine.geometry.setFromPoints(newPoints
+  orientationLine.geometry.setFromPoints(newPoints);
+}
+
+function onWindowResize() {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+}
+
+function animate() {
+  requestAnimationFrame(animate);
+  renderer.render(scene, camera);
+}
