@@ -49,7 +49,7 @@ class GLTFLoader extends THREE.Loader {
     const json = JSON.parse(new TextDecoder().decode(new Uint8Array(data)));
 
     // Create a scene object for demonstration:
-    const scene = new THREE.Group();
+    const scene = new THREE.Group()
     // Actual implementation would convert glTF data into THREE.js objects here
 
     if (onLoad) onLoad({ scene: scene });
