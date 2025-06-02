@@ -3,11 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <title>Offroad Gyro 3D</title>
+  <style>
+    body { margin: 0; overflow: hidden; }
+    canvas { display: block; }
+  </style>
 </head>
 <body>
 
 <script type="module">
-  // Import three and GLTFLoader locally from the libs folder with relative paths
   import * as THREE from './libs/three.module.js';
   import { GLTFLoader } from './libs/GLTFLoader.js';
 
@@ -18,6 +21,7 @@
 
   function init() {
     scene = new THREE.Scene();
+
     camera = new THREE.PerspectiveCamera(
       75,
       window.innerWidth / window.innerHeight,
@@ -69,7 +73,7 @@
     const yaw = THREE.MathUtils.degToRad(event.alpha || 0);
 
     vehicle.rotation.x = pitch;
-    vehicle.rotation.y = yaw
+    vehicle.rotation.y = yaw;
     vehicle.rotation.z = -roll;
   }
 
