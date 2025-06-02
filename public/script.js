@@ -27,6 +27,7 @@ function init() {
 
   // Load GLB model
   const loader = new THREE.GLTFLoader();
+  console.log('Trying to load: offroad.glb');
   loader.load(
     'offroad.glb',
     function (gltf) {
