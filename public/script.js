@@ -1,3 +1,6 @@
+import * as THREE from './libs/three.module.js';
+import { GLTFLoader } from './libs/GLTFLoader.js';
+
 let scene, camera, renderer, vehicle;
 
 init();
@@ -27,22 +30,22 @@ function init() {
 
   console.log('Script loaded. Starting GLTF load...');
 
-const loader = new THREE.GLTFLoader();
-loader.load(
-  '/offroad.glb', // Make sure the slash is here to ensure root-relative path
-  function (gltf) {
-    console.log('GLB model loaded successfully.');
-    vehicle = gltf.scene;
-    vehicle.scale.set(1, 1, 1);
-    scene.add(vehicle);
-  },
-  function (xhr) {
-    console.log(`GLB loading: ${xhr.loaded / xhr.total * 100}% loaded`);
-  },
-  function (error) {
-    console.error('Error loading GLB model:', error);
-  }
-);
+  const loader = new GLTFLoader();
+  loader.load(
+    '/offroad.glb',
+    function (gltf) {
+      console.log('GLB model loaded successfully.');
+      vehicle = gltf.scene;
+      vehicle.scale.set(1, 1, 1);
+      scene.add(vehicle);
+    },
+    function (xhr) {
+      console.log(`GLB loading: ${(xhr.loaded / xhr.total * 100).toFixed(1)}% loaded`);
+    },
+    function (error) {
+      console.error('Error loading GLB model:', error);
+    }
+  );
 
   window.addEventListener('deviceorientation', handleOrientation);
   window.addEventListener('resize', onWindowResize);
